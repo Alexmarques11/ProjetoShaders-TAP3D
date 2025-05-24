@@ -32,6 +32,7 @@ Shader "Unlit/PortalCloudShader"
         {
             Blend SrcAlpha OneMinusSrcAlpha
             ZWrite Off
+            Cull Off
 
             CGPROGRAM
             #pragma vertex vert
@@ -120,11 +121,15 @@ Shader "Unlit/PortalCloudShader"
             fixed4 frag(v2f i) : SV_Target {
                 float time = _Time.y;
 
-                float2 rippleUV = _EnableRipple > 0.5 ? RippleUV(i.uv) : i.uv; 
-                float2 distortedUV = DistortUV(rippleUV, time);
+                float2 finalUV = i.uv;
+                if (_EnableRipple > 0.5) {
+                    finalUV = RippleUV(i.uv);
+                }
 
-                float t = frac(distortedUV.y + sin(distortedUV.x * 5.0 + time * 0.5) * 0.1 + time * _Speed * 0.5);
-                float fbmMod = fbm(distortedUV * _FBMScale + time * _FBMSpeed);
+                float2 uv = DistortUV(finalUV, time);
+
+                float t = frac(uv.y + sin(uv.x * 5.0 + time * 0.5) * 0.1 + time * _Speed * 0.5);
+                float fbmMod = fbm(uv * _FBMScale + time * _FBMSpeed);
                 float3 rainbow = GetRainbowColor(t) * fbmMod * _FBMStrength * _Intensity;
 
                 float dist = distance(_WorldSpaceCameraPos, i.worldPos);

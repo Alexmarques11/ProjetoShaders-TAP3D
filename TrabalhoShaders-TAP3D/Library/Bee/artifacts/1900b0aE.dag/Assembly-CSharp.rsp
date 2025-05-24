@@ -354,6 +354,7 @@
 -analyzer:"D:/Unity Hub/2022.3.47f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/FPSController/Scripts/SC_FPSController.cs"
 "Assets/gun_project.cs"
+"Assets/PortalShader/PassaPonto.cs"
 "Assets/Scripts/PostProcessing.cs"
 -langversion:9.0
 /deterministic

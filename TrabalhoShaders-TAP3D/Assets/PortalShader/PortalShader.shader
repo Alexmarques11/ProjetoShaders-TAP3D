@@ -1,6 +1,6 @@
 Shader "Unlit/PortalShader"
 {
-     Properties
+      Properties
     {
         [Header(Rainbow)] [Space]
         _Speed("Scroll Speed", Float) = 0.2
@@ -15,6 +15,13 @@ Shader "Unlit/PortalShader"
         _CloudOpacity("Cloud Opacity", Range(0,1)) = 0.3
         _CloudScale("Cloud Scale", Float) = 5.0
         _CloudSpeed("Cloud Speed", Float) = 0.2
+        [Header(Ripple)] [Space]
+        _RippleCenter("Ripple Center", Vector) = (0.5, 0.5, 0, 0)
+        _RippleFrequency("Ripple Frequency", Float) = 20.0
+        _RippleSpeed("Ripple Speed", Float) = 5.0
+        _RippleStrength("Ripple Strength", Float) = 0.1
+        _RippleTime("Ripple Time", Float) = 0.0
+        [Toggle] _EnableRipples("Enable Ripples", Float) = 0
     }
 
     SubShader
@@ -26,6 +33,7 @@ Shader "Unlit/PortalShader"
         {
             Blend SrcAlpha OneMinusSrcAlpha
             ZWrite Off
+            Cull off
 
             CGPROGRAM
             #pragma vertex vert
@@ -57,6 +65,13 @@ Shader "Unlit/PortalShader"
             float _CloudScale;
             float _CloudSpeed;
 
+            float _EnableRipples;
+            float4 _RippleCenter;
+            float _RippleFrequency;
+            float _RippleSpeed;
+            float _RippleStrength;
+            float _RippleTime;
+
             float2 random2(float2 st) {
                 st = float2(dot(st, float2(127.1, 311.7)),
                             dot(st, float2(269.5, 183.3)));
@@ -73,6 +88,14 @@ Shader "Unlit/PortalShader"
                          dot(random2(i + float2(1.0, 0.0)), f - float2(1.0, 0.0)), u.x),
                     lerp(dot(random2(i + float2(0.0, 1.0)), f - float2(0.0, 1.0)),
                          dot(random2(i + float2(1.0, 1.0)), f - float2(1.0, 1.0)), u.x), u.y);
+            }
+
+            float2 RippleUV(float2 uv) {
+                float2 toCenter = uv - _RippleCenter.xy;
+                float dist = length(toCenter);
+                float ripple = sin(dist * _RippleFrequency - _RippleTime * _RippleSpeed);
+                float rippleOffset = ripple * exp(-dist * 10.0) * _RippleStrength;
+                return uv + normalize(toCenter) * rippleOffset;
             }
 
             v2f vert (appdata v)
@@ -104,12 +127,17 @@ Shader "Unlit/PortalShader"
             {
                 float time = _Time.y;
 
-                float2 uv = DistortUV(i.uv, time);
+                float2 finalUV = i.uv;
+                if (_EnableRipples > 0.5) {
+                    finalUV = RippleUV(i.uv);
+                }
+
+                float2 uv = DistortUV(finalUV, time);
 
                 float t = frac(uv.y + sin(uv.x * 5.0 + time * 0.5) * 0.1 + time * _Speed * 0.5);
                 float3 portalColor = GetRainbowColor(t) * _Intensity;
 
-                float2 cloudUV = i.uv * _CloudScale + time * _CloudSpeed;
+                float2 cloudUV = finalUV * _CloudScale + time * _CloudSpeed;
                 float cloudVal = noise(cloudUV);
                 float cloudMask = smoothstep(0.4, 0.6, cloudVal);
                 float3 cloudColor = float3(1.0, 1.0, 1.0) * _CloudOpacity * cloudMask;

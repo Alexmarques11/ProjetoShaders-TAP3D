@@ -74,10 +74,11 @@ Material:
     - _DstBlend: 0
     - _EdgeFade: 0.2
     - _EnableRipple: 1
+    - _EnableRipples: 0
     - _FBMOctaves: 6
     - _FBMScale: 2.3
     - _FBMSpeed: 0.2
-    - _FBMStrength: 1.25
+    - _FBMStrength: 1.6
     - _FadeEnd: 500
     - _FadeStart: 200
     - _GlossMapScale: 1
@@ -89,7 +90,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _PortalRadius: 0.3
-    - _RippleFrequency: 50
+    - _RippleFrequency: 30
     - _RippleSpeed: 4
     - _RippleStrength: 0.4
     - _RippleTime: 0.25
@@ -104,5 +105,5 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _PortalCenter: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - _RippleCenter: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _RippleCenter: {r: 0.5, g: 0.3, b: 0, a: 0}
   m_BuildTextureStacks: []

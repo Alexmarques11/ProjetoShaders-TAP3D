@@ -61,10 +61,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Brightness: 1.24
+    - _Brightness: 1
     - _BumpScale: 1
     - _ChromaticAberration: 0
-    - _Contrast: 1.56
+    - _Contrast: 1
     - _CurvatureU: 6
     - _CurvatureV: 4
     - _Cutoff: 0.5
@@ -84,9 +84,9 @@ Material:
     - _NoiseSpeed: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Saturation: 0.5
-    - _ScanlineCount: 547
-    - _ScanlineIntensity: 0.75
+    - _Saturation: 1
+    - _ScanlineCount: 760
+    - _ScanlineIntensity: 0.634
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
