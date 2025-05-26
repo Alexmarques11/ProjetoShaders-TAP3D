@@ -94,12 +94,10 @@ Shader "Unlit/PortalCloudShader"
             }
 
             float2 DistortUV(float2 uv, float time) {
-                float n1 = sin(uv.y * _DistortionScale + time * _Speed) * 0.5;
-                float n2 = cos(uv.x * _DistortionScale + time * _Speed * 1.5) * 0.5;
-                float n3 = sin(uv.y * _DistortionScale * 0.5 + time * _Speed * 1.2)
+                float n = sin(uv.y * _DistortionScale * 0.5 + time * _Speed * 1.2)
                          * cos(uv.x * _DistortionScale * 0.5 + time * _Speed * 0.8);
 
-                float2 offset = float2(n1 + n3, n2 + n3);
+                float2 offset = float2(n, n);
                 return uv + offset * _DistortionStrength;
             }
 
@@ -122,6 +120,7 @@ Shader "Unlit/PortalCloudShader"
                 float time = _Time.y;
 
                 float2 finalUV = i.uv;
+                
                 if (_EnableRipple > 0.5) {
                     finalUV = RippleUV(i.uv);
                 }

@@ -24,10 +24,6 @@ Shader "Unlit/CrtShader"
         [Header(HorizontalLines)] [Space]
         _HorizontalLines ("Horizontal Lines", Range(0, 1)) = 0.02
         _HorizontalLineCount ("Horizontal Line Count", Range(50, 500)) = 200
-        
-        [Header(FlickerIntensity)] [Space]
-        _FlickerIntensity ("Flicker Intensity", Range(0, 0.1)) = 0.01
-        _FlickerSpeed ("Flicker Speed", Range(0, 20)) = 5.0
     }
     
     SubShader
@@ -65,7 +61,7 @@ Shader "Unlit/CrtShader"
             sampler2D _MainTex;
             float4 _MainTex_ST;
             
-            float _DistortionStrength;;
+            float _DistortionStrength;
             float _ScanlineIntensity;
             float _ScanlineCount;
             float _VignetteIntensity;
@@ -152,9 +148,6 @@ Shader "Unlit/CrtShader"
                 float noise = random(distortedUV + frac(_Time.y * _NoiseSpeed));
                 noise = (noise - 0.5) * _NoiseIntensity;
                 col += noise;
-                
-                float flicker = sin(_Time.y * _FlickerSpeed) * _FlickerIntensity + 1.0;
-                col *= flicker;
                 
                 col *= vignette(distortedUV);
                 

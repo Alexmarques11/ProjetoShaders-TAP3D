@@ -63,7 +63,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _BumpScale: 1
-    - _CloudOpacity: 1
+    - _CloudOpacity: 0.467
     - _CloudScale: 300
     - _CloudSpeed: 1
     - _Cutoff: 0.5
