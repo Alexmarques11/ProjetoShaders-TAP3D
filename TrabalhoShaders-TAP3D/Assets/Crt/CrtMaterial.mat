@@ -61,7 +61,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Brightness: 1
+    - _Brightness: 1.323
     - _BumpScale: 1
     - _ChromaticAberration: 0
     - _Contrast: 1
@@ -76,23 +76,23 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _HorizontalLineCount: 253
-    - _HorizontalLines: 0.02
+    - _HorizontalLineCount: 195
+    - _HorizontalLines: 0.099
     - _Metallic: 0
     - _Mode: 0
-    - _NoiseIntensity: 0.051
-    - _NoiseSpeed: 1
+    - _NoiseIntensity: 0.0614
+    - _NoiseSpeed: 1.1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Saturation: 1
-    - _ScanlineCount: 822
-    - _ScanlineIntensity: 0.703
+    - _Saturation: 0.96
+    - _ScanlineCount: 205
+    - _ScanlineIntensity: 0.451
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _VignetteIntensity: 0.95
-    - _VignetteSmoothness: 0.81
+    - _VignetteSmoothness: 0.338
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
